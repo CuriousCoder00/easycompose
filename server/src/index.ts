@@ -3,7 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { PORT } from './lib/env.config';
 import './lib/db';
-import authRouter from './routes/auth.routes';
+import { authRouter } from "./routes/index.routes";
 
 const app = express();
 
