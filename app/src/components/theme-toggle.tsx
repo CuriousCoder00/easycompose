@@ -15,3 +15,23 @@ export const ThemeToggle = () => {
     </Button>
   );
 };
+
+export function ThemeTogglerMenu() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <div
+      className="flex items-center justify-start gap-2 cursor-pointer w-full"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
+      {theme === "light" ? (
+        <div className="flex items-center justify-start gap-2">
+          <Sun className="h-[1.2rem] w-[1.2rem]" /> Light Mode
+        </div>
+      ) : (
+        <div className="flex items-center justify-start gap-2">
+          <Moon className="h-[1.2rem] w-[1.2rem]" /> Dark Mode
+        </div>
+      )}
+    </div>
+  );
+}

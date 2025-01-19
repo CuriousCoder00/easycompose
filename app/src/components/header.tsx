@@ -1,11 +1,16 @@
-import React from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./theme-toggle";
 
 const Header = () => {
+  const pathname = useLocation().pathname;
+  const paths = ["/auth/login", "/auth/register", "/"];
   return (
-    <header className="fixed inset-x-0  dark:bg-black/30 backdrop-blur-md z-50">
+    <header
+      className={`fixed inset-x-0  dark:bg-black/30 backdrop-blur-md z-50 border-b border-border bg-black/5 ${
+        !paths.includes(pathname) && "hidden"
+      } `}
+    >
       <nav className="flex justify-between items-center p-4 md:px-20">
         <Link to="/" className="text-3xl font-bold text-sky-600">
           EasyCompose
