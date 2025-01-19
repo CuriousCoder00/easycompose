@@ -33,3 +33,11 @@ export const JWT_SECRET: string = process.env.JWT_SECRET || 'cd311b835802c9e4c51
  * @default 7d
  */
 export const JWT_EXPIRATION: string = process.env.JWT_EXPIRATION || '7d';
+
+/**
+ * Client URL
+ * @type string
+ * @description Base Client URL
+ * @default http://localhost:5173
+ */
+export const BASE_CLIENT_URL: string = process.env.BASE_API_URL || 'http://localhost:5173';

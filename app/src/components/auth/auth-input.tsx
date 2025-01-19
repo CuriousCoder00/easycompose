@@ -24,7 +24,7 @@ export const AuthInput = ({
   form,
   label,
   name,
-  type,
+  type = "text",
   placeholder,
   disabled,
   required,
@@ -39,7 +39,7 @@ export const AuthInput = ({
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            {type === "password" && job === "confirmPassword" ? (
+            {job === "confirmPassword" ? (
               <div className="relative">
                 <Input
                   {...field}
@@ -63,7 +63,7 @@ export const AuthInput = ({
             ) : (
               <Input
                 {...field}
-                type="text"
+                type={type}
                 placeholder={placeholder}
                 disabled={disabled}
                 required={required}

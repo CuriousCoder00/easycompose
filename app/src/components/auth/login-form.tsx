@@ -8,9 +8,12 @@ import { useState } from "react";
 import { Loader } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { LoginInput, loginSchema } from "@/lib/validations/auth.validations";
+import { login } from "@/services/auth.services";
+import { useSession } from "@/hooks/use-session";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const { setSession } = useSession();
   const { toast } = useToast();
   const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
@@ -22,29 +25,23 @@ const LoginForm = () => {
 
   const handleLogin = async (data: LoginInput) => {
     setLoading(true);
-    // try {
-    //   const res = await loginService(data);
-    //   toast({
-    //     title: res.message,
-    //     variant: res.status === 200 ? "default" : "destructive",
-    //   });
-    //   localStorage.setItem("writeup_userId", res.user.id as string);
-    //   if (res.status === 200) {
-    //     window.location.href = "/";
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   toast({
-    //     title: (error as Error).message,
-    //     variant: "destructive",
-    //   });
-    // } finally {
-    //   setLoading(false);
-    // }
-    toast({
-      title: "Working on it..",
-      variant: "destructive",
-    });
+    try {
+      const res = await login(data);
+      const session = { token: res.token, user: res.user };
+      setSession(session);
+      localStorage.setItem("easy_compose_session", JSON.stringify(session));
+      toast({
+        title: res.message,
+        variant: "default",
+      });
+    } catch (error) {
+      toast({
+        title: (error as Error).message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

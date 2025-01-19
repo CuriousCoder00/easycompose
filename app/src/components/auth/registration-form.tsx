@@ -11,6 +11,7 @@ import {
   RegistrationInput,
   registrationSchema,
 } from "@/lib/validations/auth.validations";
+import { register } from "@/services/auth.services";
 
 const RegistrationForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,27 +32,21 @@ const RegistrationForm = () => {
 
   const signup = async (data: RegistrationInput) => {
     setLoading(true);
-    //   try {
-    //     const res = await signupService(data);
-    //     toast({
-    //       title: res.message,
-    //       variant: res.status ? "default" : "destructive",
-    //     });
-    //     if (res.status === 200 || res.status === 201 || res.status === 204) {
-    //       navigate("/auth/login");
-    //     }
-    //   } catch (error) {
-    //     toast({
-    //       title: (error as Error).message,
-    //       variant: "destructive",
-    //     });
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    toast({
-      title: "Working on it..",
-      variant: "destructive",
-    });
+    try {
+      const res = await register(data);
+      toast({
+        title: res.message,
+        variant: "default",
+      });
+      navigate("/auth/login");
+    } catch (error) {
+      toast({
+        title: (error as Error).message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <AuthForm form={form}>
