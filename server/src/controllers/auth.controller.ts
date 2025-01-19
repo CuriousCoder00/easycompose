@@ -87,7 +87,7 @@ export const loginController: RequestHandler = async (req: Request, res: Respons
         const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
         // Return the token
         res.cookie("easy_compose_token", token, { httpOnly: true, sameSite: 'none', secure: true, }).status(200).json({
-            message: "Login successful", user: { id: user._id, name: user.name, email: user.email }, token
+            message: "Login successful", user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar }, token
         });
         return;
     } catch (error: any) {

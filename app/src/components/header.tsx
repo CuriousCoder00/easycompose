@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./theme-toggle";
+import { useSession } from "@/hooks/use-session";
 
 const Header = () => {
   const pathname = useLocation().pathname;
   const paths = ["/auth/login", "/auth/register", "/"];
+  const { session } = useSession();
   return (
     <header
       className={`fixed inset-x-0  dark:bg-black/30 backdrop-blur-md z-50 border-b border-border bg-black/5 ${
@@ -16,9 +18,15 @@ const Header = () => {
           EasyCompose
         </Link>
         <div className="flex items-center gap-4">
-          <Button className="bg-sky-700 hover:bg-sky-600 transition-colors duration-300 text-white px-6">
-            <Link to={"/auth/login"}>Login</Link>
-          </Button>
+          {session.isLoggedIn ? (
+            <Button className="bg-sky-700 hover:bg-sky-600 transition-colors duration-300 text-white px-6">
+              <Link to={"/dashboard"}>Get Started</Link>
+            </Button>
+          ) : (
+            <Button className="bg-sky-700 hover:bg-sky-600 transition-colors duration-300 text-white px-6">
+              <Link to={"/auth/login"}>Login</Link>
+            </Button>
+          )}
           <ThemeToggle />
         </div>
       </nav>

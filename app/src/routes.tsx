@@ -1,12 +1,27 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Outlet, Navigate } from "react-router";
 import LoginPage from "./pages/auth/login";
 import Home from "./pages/home";
 import RegistrationPage from "./pages/auth/register";
-import DashboardPage from "./pages/dasboard";
+import DashboardPage from "./pages/dashboard";
 import TemplatesPage from "./pages/templates";
 import MainLayout from "./layouts/main-layout";
+import { useSession } from "./hooks/use-session";
+
+interface AuthenticatedRouteProps {
+  isAuthenticated: boolean;
+  [key: string]: any;
+}
+
+const AuthenticatedRoute = ({ isAuthenticated }: AuthenticatedRouteProps) => {
+  return isAuthenticated ? <Outlet /> : <Navigate replace to="/auth/login" />;
+};
+
+const UnauthenticatedRoute = ({ isAuthenticated }: AuthenticatedRouteProps) => {
+  return isAuthenticated ? <Navigate replace to="/" /> : <Outlet />;
+};
 
 export const AppRouter = () => {
+  const isLoggedIn = useSession().session.isLoggedIn;
   return (
     <Routes>
       {/* Public Routes */}
@@ -14,21 +29,25 @@ export const AppRouter = () => {
         <Route key={index} path={route.url} element={<route.component />} />
       ))}
       {/* Auth Routes */}
-      {authRoutes.map((route, index) => (
-        <Route key={index} path={route.url} element={<route.component />} />
-      ))}
+      <Route element={<UnauthenticatedRoute isAuthenticated={isLoggedIn} />}>
+        {authRoutes.map((route, index) => (
+          <Route key={index} path={route.url} element={<route.component />} />
+        ))}
+      </Route>
       {/* Private Routes */}
-      {privateRoutes.map((route, index) => (
-        <Route
-          key={index}
-          path={route.url}
-          element={
-            <MainLayout>
-              <route.component />
-            </MainLayout>
-          }
-        />
-      ))}
+      <Route element={<AuthenticatedRoute isAuthenticated={isLoggedIn} />}>
+        {privateRoutes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.url}
+            element={
+              <MainLayout>
+                <route.component />
+              </MainLayout>
+            }
+          />
+        ))}
+      </Route>
     </Routes>
   );
 };

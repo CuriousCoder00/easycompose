@@ -15,12 +15,9 @@ export const useSession = () => {
       setSession(JSON.parse(sessionData));
     } else {
       setSession({
+        isLoggedIn: false,
         token: null,
-        user: {
-          id: "",
-          email: "",
-          name: "",
-        },
+        user: null,
       });
     }
   }, []);

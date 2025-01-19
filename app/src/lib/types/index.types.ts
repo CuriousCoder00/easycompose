@@ -7,10 +7,12 @@ export interface User {
 }
 
 export interface Session {
+    isLoggedIn: boolean;
     user: {
         id: string;
         email: string;
         name: string;
+        avatar?: string;
     } | null;
     token: string | null;
 }

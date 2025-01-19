@@ -27,7 +27,7 @@ const LoginForm = () => {
     setLoading(true);
     try {
       const res = await login(data);
-      const session = { token: res.token, user: res.user };
+      const session = { token: res.token, user: res.user, isLoggedIn: true };
       setSession(session);
       localStorage.setItem("easy_compose_session", JSON.stringify(session));
       toast({

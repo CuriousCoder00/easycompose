@@ -24,9 +24,10 @@ export const register = async (data: RegistrationInput) => {
 
 export const logout = async () => {
     try {
-        await axiosInstance.post("/auth/logout");
+        const response = await axiosInstance.post("/auth/logout");
         localStorage.removeItem("easy_compose_token");
         localStorage.removeItem("easy_compose_session");
+        return response.data;
     } catch (error) {
         return Promise.reject((error as AxiosError).response?.data);
     }

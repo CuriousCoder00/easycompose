@@ -10,6 +10,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    avatar: {
+        type: String,
+        default: "https://res.cloudinary.com/dx9n8tsyu/image/upload/v1634312884/easy-compose/default-avatar.png"
+    },
     name: {
         type: String,
         required: true
