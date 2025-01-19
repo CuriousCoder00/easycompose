@@ -1,0 +1,20 @@
+{
+  "name": "easy-compose",
+  "version": "1.0.0",
+  "description": "EasyCompose a web platform to build your email templates with ease",
+  "main": ".",
+  "scripts": {
+    "install": "npm i --save-dev concurrently && cd server && npm i && cd ../app && npm i",
+    "build": "concurrently \"cd server && npm run build\" \"cd app && npm run build\"",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd app && npm run dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CuriousCoder00/easycompose"
+  },
+  "author": "curiouscoder00",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

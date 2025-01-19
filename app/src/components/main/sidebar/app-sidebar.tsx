@@ -56,7 +56,7 @@ export function AppSidebar() {
         <AppMenu items={data.applicationMenu} />
       </SidebarContent>
       <SidebarFooter>
-        <AccountNav user={data.user} />
+        <AccountNav />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
