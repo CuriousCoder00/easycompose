@@ -1,10 +1,12 @@
 import { Request, RequestHandler, Response } from "express";
+
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 import User from "../schemas/user.schema";
 
 import { JWT_EXPIRATION, JWT_SECRET } from "../lib/env.config";
+import { validateRegistration } from "../validations/auth.validations";
 
 /**
  * Registration controller
@@ -23,7 +25,8 @@ import { JWT_EXPIRATION, JWT_SECRET } from "../lib/env.config";
 export const registrationController: RequestHandler = async (req: Request, res: Response): Promise<void> => {
     try {
         // Get email, password, and name from the request body
-        const { email, password, name } = req.body;
+        const { email, password, name } = validateRegistration(req.body);
+
         // Check if the user already exists
         const candidate = await User.findOne({ email });
         // If the user exists, return a 400 status code
@@ -33,21 +36,18 @@ export const registrationController: RequestHandler = async (req: Request, res: 
         }
         // If the user does not exist, continue
         // Create new unique username from email
-        const username = email.split("@")[0];
         // Hash the password
         const hashPassword = await bcrypt.hash(password, 10);
         // Create a new user
-        const user = new User({ email, password: hashPassword, name, username });
+        const user = new User({ email, password: hashPassword, name });
         // Save the user
         await user.save();
         // Return a 201 status code
         res.status(201).json({ message: "User created" });
         return;
-    } catch (error) {
-        // Log the error
-        console.error(error);
+    } catch (error: any) {
         // Return a 500 status code
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ message: error.message });
         return;
     }
 };
@@ -86,14 +86,13 @@ export const loginController: RequestHandler = async (req: Request, res: Respons
         // Create a JWT token
         const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
         // Return the token
-        res.cookie("social_media_app_token", token, { httpOnly: true, sameSite: 'none', secure: true, }).status(200).json({
+        res.cookie("easy_compose_token", token, { httpOnly: true, sameSite: 'none', secure: true, }).status(200).json({
             message: "Login successful", user: { id: user._id, name: user.name, email: user.email }, token
         });
         return;
-    } catch (error) {
-        console.error(error);
+    } catch (error: any) {
         // Return a 500 status code
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ message: error.message });
         return;
     }
 }
@@ -113,12 +112,11 @@ export const loginController: RequestHandler = async (req: Request, res: Respons
 export const logoutController: RequestHandler = async (req: Request, res: Response): Promise<void> => {
     try {
         // Clear the token
-        res.clearCookie("social_media_app_token").status(200).json({ message: "Logout successful" });
+        res.clearCookie("easy_compose_token").status(200).json({ message: "Logout successful" });
         return;
-    } catch (error) {
-        console.error(error);
+    } catch (error: any) {
         // Return a 500 status code
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ message: error.message });
         return;
     }
 }

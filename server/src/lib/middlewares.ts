@@ -9,7 +9,7 @@ interface JwtPayload {
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = req.cookies?.social_media_app_token;
+        const token = req.cookies?.easy_compose_token;
         if (!token) {
             res.status(401).json({ message: "Unauthorized: Token missing" });
             return
