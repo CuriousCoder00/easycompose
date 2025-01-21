@@ -20,7 +20,7 @@ const AppMenu = ({
         {items.map((item) => (
           <SidebarMenuItem>
             <SidebarMenuButton tooltip={item.title}>
-              <Link to={item.url} className="flex items-center gap-2">
+              <Link to={item.url} className="flex items-center gap-2 w-full">
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
               </Link>

@@ -13,7 +13,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 export default function MainLayout({
@@ -21,23 +21,24 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [activePathname, setActivePathname] = useState<string>("Dashboard");
-  const [activePath, setActivePath] = useState<string>("/dashboard");
+  const [breadcrumbItems, setBreadcrumbItems] = useState<
+    { title: string; url: string }[]
+  >([]);
   const path = useLocation().pathname;
-  const paths = path.split("/");
+
   useEffect(() => {
-    if (paths.length === 2) {
-      setActivePathname(
-        breadcrumbs.filter((item) => item.url === path)[0].title
-      );
-      setActivePath(
-        breadcrumbs.find((item) => item.url === path)?.url || "/dashboard"
-      );
-    } else {
-      setActivePathname(paths[paths.length - 1]);
-      setActivePath(path);
-    }
+    const paths = path.split("/").filter((segment) => segment); // Remove empty strings
+    const breadcrumbs = paths.map((segment, index) => {
+      const url = `/${paths.slice(0, index + 1).join("/")}`;
+
+      return {
+        title: capitalize(breadcrumbsMap[segment] || segment),
+        url,
+      };
+    });
+    setBreadcrumbItems(breadcrumbs);
   }, [path]);
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -51,12 +52,16 @@ export default function MainLayout({
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Easy Compose</BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href={activePath}>
-                    <BreadcrumbPage>{activePathname}</BreadcrumbPage>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
+                {breadcrumbItems.map((item) => (
+                  <React.Fragment key={item.url}>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      <BreadcrumbLink href={item.url}>
+                        <BreadcrumbPage>{item.title}</BreadcrumbPage>
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                  </React.Fragment>
+                ))}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
@@ -67,17 +72,13 @@ export default function MainLayout({
   );
 }
 
-const breadcrumbs = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-  },
-  {
-    title: "Templates",
-    url: "/templates",
-  },
-  {
-    title: "Search",
-    url: "/search",
-  },
-];
+const breadcrumbsMap: Record<string, string> = {
+  dashboard: "Dashboard",
+  templates: "Templates",
+  "verfication-emails": "Verification Emails",
+  search: "Search",
+};
+
+function capitalize(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}

@@ -21,3 +21,12 @@ export interface AuthResponse {
     user: User;
     token: string;
 }
+
+export interface Template {
+    id: string;
+    name: string;
+    description: string;
+    html: HTMLElement;
+    css: string;
+    js: string;
+}

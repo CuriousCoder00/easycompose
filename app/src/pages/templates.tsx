@@ -1,9 +1,12 @@
+import AllTemplates from "@/components/main/templates/all-templates";
+import TemplatesHeader from "@/components/main/templates/templates-header";
 
 const TemplatesPage = () => {
   return (
-      <div className="flex items-center justify-center w-full h-full">
-        <h1 className="text-3xl font-bold ">Welcome to the Templates</h1>
-      </div>
+    <div className="flex flex-col items-start justify-start w-full h-full">
+      <TemplatesHeader />
+      <AllTemplates />
+    </div>
   );
 };
 

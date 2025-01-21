@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    .container { width: 100%; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; }
+    .header { background-color: #f4f4f4; padding: 20px; text-align: center; }
+    .content { padding: 20px; }
+    .footer { background-color: #f4f4f4; padding: 10px; text-align: center; font-size: 12px; color: #777; }
+    a { color: #007BFF; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>{{newsletterTitle}}</h1>
+    </div>
+    <div class="content">
+      <p>{{introduction}}</p>
+      <p>{{bodyText}}</p>
+      <a href="{{ctaUrl}}" style="background: #007BFF; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">{{ctaText}}</a>
+    </div>
+    <div class="footer">
+      <p>You're receiving this email because you subscribed to {{companyName}} newsletters.</p>
+      <p><a href="{{unsubscribeUrl}}">Unsubscribe</a></p>
+    </div>
+  </div>
+</body>
+</html>

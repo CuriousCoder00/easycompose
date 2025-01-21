@@ -56,6 +56,10 @@ const publicRoutes = [{ url: "/", component: Home }];
 const privateRoutes = [
   { url: "/dashboard", component: DashboardPage },
   { url: "/templates", component: TemplatesPage },
+  { url: "/templates/newsletter", component: TemplatesPage },
+  { url: "/templates/verification-emails", component: TemplatesPage },
+  { url: "/templates/invites", component: TemplatesPage },
+  { url: "/templates/webinars", component: TemplatesPage },
 ];
 const authRoutes = [
   { url: "/auth/login", component: LoginPage },

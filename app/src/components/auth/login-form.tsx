@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthForm from "./auth-form";
 import { AuthInput } from "./auth-input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -15,6 +15,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { setSession } = useSession();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -34,6 +35,9 @@ const LoginForm = () => {
         title: res.message,
         variant: "default",
       });
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     } catch (error) {
       toast({
         title: (error as Error).message,

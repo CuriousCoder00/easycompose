@@ -3,7 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { BASE_CLIENT_URL, PORT } from './lib/env.config';
 import './lib/db';
-import { authRouter, userRouter } from "./routes/index.routes";
+import { authRouter, templateRouter } from "./routes/index.routes";
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/user', userRouter);
+app.use('/api/v1/template', templateRouter);
 
 
 app.listen(PORT, () => {
