@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import { Button } from "../ui/button";
+import { useSession } from "@/hooks/use-session";
 
 export default function Hero() {
+  const { session } = useSession();
   return (
     <div className="flex flex-col items-center justify-center relative min-h-dvh w-full">
       <div
@@ -25,9 +27,15 @@ export default function Hero() {
             </p>
           </div>
           <div className="flex mx-auto items-center gap-4 justify-center mt-14">
-            <Button className="bg-sky-700 hover:bg-sky-600 text-white transition-colors duration-300 h-12 px-6">
-              <Link to="/auth/register">Start Building Now</Link>
-            </Button>
+            {session.isLoggedIn ? (
+              <Button className="bg-sky-700 hover:bg-sky-600 text-white transition-colors duration-300 h-12 px-8">
+                <Link to="/dashboard">Get Started</Link>
+              </Button>
+            ) : (
+              <Button className="bg-sky-700 hover:bg-sky-600 text-white transition-colors duration-300 h-12 px-6">
+                <Link to="/auth/register">Start Building Now</Link>
+              </Button>
+            )}
             <Button
               className=" transition-colors duration-300 h-12 px-6"
               variant={"secondary"}

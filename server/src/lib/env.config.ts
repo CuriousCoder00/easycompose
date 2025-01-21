@@ -41,3 +41,31 @@ export const JWT_EXPIRATION: string = process.env.JWT_EXPIRATION || '7d';
  * @default http://localhost:5173
  */
 export const BASE_CLIENT_URL: string = process.env.BASE_API_URL || 'http://localhost:5173';
+
+/**
+ * Cloudinary Cloud Name
+ * @type string
+ * @description Cloudinary Cloud Name
+ */
+export const CLOUDINARY_CLOUD_NAME: string = process.env.CLOUDINARY_CLOUD_NAME as string;
+
+/**
+ * Cloudinary API Key
+ * @type string
+ * @description Cloudinary API Key
+ */
+export const CLOUDINARY_API_KEY: string = process.env.CLOUDINARY_API_KEY as string;
+
+/**
+ * Cloudinary API Secret
+ * @type string
+ * @description Cloudinary API Secret
+ */
+export const CLOUDINARY_API_SECRET: string = process.env.CLOUDINARY_API_SECRET as string;
+
+/**
+ * Cloudinary Base URL
+ * @type string
+ * @description Cloudinary Base URL
+ */
+export const CLOUDINARY_URL: string = process.env.CLOUDINARY_URL as string;

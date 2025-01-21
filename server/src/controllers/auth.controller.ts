@@ -7,6 +7,8 @@ import User from "../schemas/user.schema";
 
 import { JWT_EXPIRATION, JWT_SECRET } from "../lib/env.config";
 import { validateRegistration } from "../validations/auth.validations";
+import { avatars, rng } from "../lib/utils";
+
 
 /**
  * Registration controller
@@ -38,8 +40,10 @@ export const registrationController: RequestHandler = async (req: Request, res: 
         // Create new unique username from email
         // Hash the password
         const hashPassword = await bcrypt.hash(password, 10);
+        const random = rng(0, 6);
+        const avatar = avatars[random];
         // Create a new user
-        const user = new User({ email, password: hashPassword, name });
+        const user = new User({ email, password: hashPassword, name, avatar });
         // Save the user
         await user.save();
         // Return a 201 status code
