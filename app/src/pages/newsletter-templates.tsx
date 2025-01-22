@@ -1,9 +1,8 @@
-import React from 'react'
 
 const NewsLetterTemplates = () => {
   return (
     <div>
-      
+      Newsletter
     </div>
   )
 }
