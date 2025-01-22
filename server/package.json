@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "npm run build",
     "start": "node dist/index.js",
-    "build": "tsc -b",
+    "build": "ts-node",
     "dev": "nodemon --files src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,9 +19,11 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "esbuild": "^0.24.2",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
+    "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
     "typescript": "^5.7.3",
     "zod": "^3.24.1"
