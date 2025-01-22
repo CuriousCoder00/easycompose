@@ -24,7 +24,6 @@
     "mongoose": "^8.9.5",
     "tsc": "^2.0.4",
     "typescript": "^5.7.3",
-    "uuidv4": "^6.2.13",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -33,7 +32,6 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/mongoose": "^5.11.97",
     "nodemon": "^3.1.9"
   }
 }
