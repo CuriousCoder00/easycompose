@@ -145,7 +145,7 @@ export const deleteTemplateController: RequestHandler = async (req: Request, res
 
 export const getTemplate = async (req: Request, res: Response) => {
     try {
-        fs.readFile("https://github.com/CuriousCoder00/easycompose/blob/80030182435ba0e1d69c35ce864429b878cc7311/server/src/lib/templates/layout.html", "utf8", (err, data) => {
+        fs.readFile("src/lib/templates/layout.html", "utf8", (err, data) => {
             if (err) {
                 res.status(500).json({ message: err.message });
                 return;

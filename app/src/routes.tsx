@@ -4,8 +4,9 @@ import Home from "./pages/home";
 import RegistrationPage from "./pages/auth/register";
 import DashboardPage from "./pages/dashboard";
 import TemplatesPage from "./pages/templates";
-import MainLayout from "./layouts/main-layout";
 import { useSession } from "./hooks/use-session";
+import { DefaultTemplatePreview } from "./components/main/templates/shared/template-preview";
+import TemplateEditorPage from "./pages/editor";
 
 interface AuthenticatedRouteProps {
   isAuthenticated: boolean;
@@ -37,15 +38,7 @@ export const AppRouter = () => {
       {/* Private Routes */}
       <Route element={<AuthenticatedRoute isAuthenticated={isLoggedIn} />}>
         {privateRoutes.map((route, index) => (
-          <Route
-            key={index}
-            path={route.url}
-            element={
-              <MainLayout>
-                <route.component />
-              </MainLayout>
-            }
-          />
+          <Route key={index} path={route.url} element={<route.component />} />
         ))}
       </Route>
     </Routes>
@@ -56,6 +49,9 @@ const publicRoutes = [{ url: "/", component: Home }];
 const privateRoutes = [
   { url: "/dashboard", component: DashboardPage },
   { url: "/templates", component: TemplatesPage },
+  { url: "/template/editor", component: TemplateEditorPage },
+  { url: "/template/preview", component: DefaultTemplatePreview },
+  { url: "/template/preview?templateId", component: DefaultTemplatePreview },
   { url: "/templates/newsletter", component: TemplatesPage },
   { url: "/templates/verification-emails", component: TemplatesPage },
   { url: "/templates/invites", component: TemplatesPage },

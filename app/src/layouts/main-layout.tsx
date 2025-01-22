@@ -66,7 +66,7 @@ export default function MainLayout({
             </Breadcrumb>
           </div>
         </header>
-        {children}
+        <div className="flex flex-col items-start justify-start">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );
