@@ -40,7 +40,7 @@ export const JWT_EXPIRATION: string = process.env.JWT_EXPIRATION || '7d';
  * @description Base Client URL
  * @default http://localhost:5173
  */
-export const BASE_CLIENT_URL: string = process.env.BASE_API_URL || 'http://localhost:5173';
+export const BASE_CLIENT_URL: string = process.env.BASE_CLIENT_URL || 'http://localhost:5173';
 
 /**
  * Cloudinary Cloud Name
