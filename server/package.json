@@ -6,9 +6,8 @@
   "scripts": {
     "prestart": "npm run build",
     "start": "node dist/index.js",
-    "build": "ts-node",
-    "dev": "nodemon --files src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm install && tsc",
+    "dev": "nodemon --files src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +22,6 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
-    "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
     "typescript": "^5.7.3",
     "zod": "^3.24.1"
