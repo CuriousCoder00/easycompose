@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run build",
     "start": "node dist/index.js",
-    "build": "npm install && tsc",
+    "build": "npm install && tsc -b",
     "dev": "nodemon --files src/index.ts"
   },
   "keywords": [],
