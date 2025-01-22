@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Template } from "@/lib/types/index.types";
 
-const TemplateCard = ({ template }: { template: Template }) => {
+const TemplateCard = () => {
   return (
     <div>
       <div className="flex flex-col gap-2 p-4 border-border rounded-lg shadow-md">
